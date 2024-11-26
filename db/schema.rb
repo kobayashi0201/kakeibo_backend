@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_23_004134) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_26_035950) do
   create_table "ai_recommendations", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "recommend", null: false
@@ -59,6 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_004134) do
     t.decimal "percentage", precision: 5, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "target_date"
     t.index ["user_id"], name: "index_goals_on_user_id", unique: true
   end
 
