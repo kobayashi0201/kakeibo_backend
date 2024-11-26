@@ -6,7 +6,7 @@ class DropCalculatedWeeklyTransactions < ActiveRecord::Migration[8.0]
       t.decimal :total, precision: 15, scale: 2, null: false, default: 0.0
       t.json :total_by_category, null: false
       t.json :percentage_by_category, null: false
-  
+
       t.timestamps
     end
   end

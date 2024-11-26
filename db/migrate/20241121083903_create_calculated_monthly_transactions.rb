@@ -9,6 +9,6 @@ class CreateCalculatedMonthlyTransactions < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :calculated_monthly_transactions, [:user_id, :month], unique: true
+    add_index :calculated_monthly_transactions, [ :user_id, :month ], unique: true
   end
 end
