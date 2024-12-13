@@ -56,6 +56,21 @@ jobs:
   test_rspec:
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_USER: kakeibo
+          MYSQL_PASSWORD: kk199621
+          MYSQL_ROOT_PASSWORD: ka0ke2i0bo1
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
