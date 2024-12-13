@@ -1,0 +1,29 @@
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: kakeibo
+      MYSQL_PASSWORD: kk199621
+      MYSQL_ROOT_PASSWORD: ka0ke2i0bo1
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    environment:
+      SECRET_KEY_BASE: "your_generated_secret_key_base"
+      KAKEIBO_DATABASE_PASSWORD: kk199621
+      RAILS_ENV: development
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/rails
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

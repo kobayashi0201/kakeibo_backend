@@ -1,3 +1,3 @@
-class CalculatedMonthlyTransactions < ApplicationRecord
+class CalculatedMonthlyTransaction < ApplicationRecord
     belongs_to :user
 end

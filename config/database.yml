@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
+  username: kakeibo_dev
   password: kk199621
-  host: localhost
+  host: db
   socket: /tmp/mysql.sock
 
 development:
@@ -55,6 +55,7 @@ production:
     database: kakeibo_production
     username: kakeibo
     password: <%= ENV["KAKEIBO_DATABASE_PASSWORD"] %>
+    host: db
   cache:
     <<: *primary_production
     database: kakeibo_production_cache
