@@ -5,7 +5,7 @@ RSpec.describe CreateTransactionService, type: :service do
     let(:user) { create(:user) }
     let(:category) { create(:category) }
     let(:transaction_params) do
-      { 
+      {
         amount: 1000,
         date: '2025-01-01',
         description: 'テスト',
@@ -15,7 +15,7 @@ RSpec.describe CreateTransactionService, type: :service do
     end
 
     it 'create a new transaction' do
-      expect{ CreateTransactionService.new(transaction_params).create_transaction }.to change(Transaction, :count).by(1)
+      expect { CreateTransactionService.new(transaction_params).create_transaction }.to change(Transaction, :count).by(1)
     end
   end
 end

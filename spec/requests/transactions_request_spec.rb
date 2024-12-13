@@ -5,14 +5,14 @@ RSpec.describe 'Transactions API', type: :request do
     let(:user) { create(:user) }
     let(:category) { create(:category) }
     let(:transaction_params) do
-      { 
-        transaction: { 
+      {
+        transaction: {
           amount: 1000,
           date: '2025-01-01',
           description: 'テスト',
           user_id: user.id,
           category_id: category.id
-        } 
+        }
       }
     end
 
@@ -26,7 +26,7 @@ RSpec.describe 'Transactions API', type: :request do
     end
 
     it 'create a new transaction' do
-      expect{ send_post_request(transaction_params) }.to change(Transaction, :count).by(1)
+      expect { send_post_request(transaction_params) }.to change(Transaction, :count).by(1)
     end
 
     it 'created transaction in JSON format' do
