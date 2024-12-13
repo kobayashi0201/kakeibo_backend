@@ -60,8 +60,7 @@ jobs:
       db:
         image: mysql:5.7
         env:
-          MYSQL_USER: kakeibo
-          MYSQL_PASSWORD: kk199621
+          MYSQL_DATABASE: kakeibo_test
           MYSQL_ROOT_PASSWORD: ka0ke2i0bo1
         ports:
           - 3306:3306
