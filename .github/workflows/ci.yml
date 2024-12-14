@@ -61,16 +61,16 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_DATABASE: kakeibo_test
-          MYSQL_USER: kakeibo_dev
-          MYSQL_PASSWORD: kk199621
-          MYSQL_ROOT_PASSWORD: ka0ke2i0bo1
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
         ports:
           - 3306:3306
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=3
+          --health-retries=5
 
     steps:
       - name: Checkout code
@@ -84,6 +84,9 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
+
+      - name: Set MYSQL_HOST environment variable
+        run: echo "MYSQL_HOST=db" >> $GITHUB_ENV
 
       - name: Run RSpec tests
         run: bundle exec rspec

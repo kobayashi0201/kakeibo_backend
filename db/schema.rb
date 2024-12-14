@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
-  create_table "ai_recommendations", charset: "utf8", force: :cascade do |t|
+  create_table "ai_recommendations", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "recommend", null: false
     t.string "status", default: "unread", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.index ["user_id"], name: "index_ai_recommendations_on_user_id", unique: true
   end
 
-  create_table "calculated_monthly_transactions", charset: "utf8", force: :cascade do |t|
+  create_table "calculated_monthly_transactions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "month", null: false
     t.decimal "total", precision: 15, scale: 2, default: "0.0", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.index ["user_id"], name: "index_calculated_monthly_transactions_on_user_id"
   end
 
-  create_table "calculated_weekly_transactions", charset: "utf8", force: :cascade do |t|
+  create_table "calculated_weekly_transactions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "week_start_date", null: false
     t.decimal "total", precision: 15, scale: 2, default: "0.0", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.index ["user_id"], name: "index_calculated_weekly_transactions_on_user_id"
   end
 
-  create_table "categories", charset: "utf8", force: :cascade do |t|
+  create_table "categories", charset: "utf8mb3", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.index ["user_id", "name"], name: "index_categories_on_user_id_and_name", unique: true
   end
 
-  create_table "goals", charset: "utf8", force: :cascade do |t|
+  create_table "goals", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.decimal "goal_savings", precision: 15, scale: 2, default: "0.0", null: false
     t.decimal "current_savings", precision: 15, scale: 2, default: "0.0", null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.index ["user_id"], name: "index_goals_on_user_id", unique: true
   end
 
-  create_table "transactions", charset: "utf8", force: :cascade do |t|
+  create_table "transactions", charset: "utf8mb3", force: :cascade do |t|
     t.decimal "amount", precision: 10, null: false
     t.string "date", null: false
     t.text "description"
@@ -75,7 +75,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.index ["user_id"], name: "fk_rails_77364e6416"
   end
 
-  create_table "users", charset: "utf8", force: :cascade do |t|
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
