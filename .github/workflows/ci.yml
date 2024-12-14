@@ -87,15 +87,8 @@ jobs:
 
       - name: Set MYSQL_HOST environment variable
         run: |
-          echo "MYSQL_HOST=db" >> $GITHUB_ENV
+          echo "MYSQL_HOST=127.0.0.1" >> $GITHUB_ENV
           echo "RAILS_ENV=test" >> $GITHUB_ENV
-
-      - name: Wait for MySQL to be ready
-        run: |
-          until mysqladmin ping -h "$MYSQL_HOST" --silent; do
-            echo "Waiting for MySQL..."
-            sleep 5
-          done
 
       - name: Run RSpec tests
         run: bundle exec rspec
