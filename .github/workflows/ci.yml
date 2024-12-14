@@ -86,7 +86,9 @@ jobs:
         run: bundle install
 
       - name: Set MYSQL_HOST environment variable
-        run: echo "MYSQL_HOST=db" >> $GITHUB_ENV
+        run: |
+          echo "MYSQL_HOST=db" >> $GITHUB_ENV
+          echo "RAILS_ENV=test" >> $GITHUB_ENV
 
       - name: Run RSpec tests
         run: bundle exec rspec

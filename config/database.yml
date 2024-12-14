@@ -53,8 +53,8 @@ production:
   primary: &primary_production
     <<: *default
     database: kakeibo_production
-    username: <%= ENV.fetch("MYSQL_USER") %>
-    password: <%= ENV.fetch("MYSQL_PASSWORD") %>
+    username: <%= ENV.fetch("MYSQL_USER", "root") %>
+    password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
   cache:
     <<: *primary_production
     database: kakeibo_production_cache
