@@ -16,7 +16,6 @@ default: &default
   username: kakeibo_dev
   password: kk199621
   host: db
-  socket: /tmp/mysql.sock
 
 development:
   <<: *default
