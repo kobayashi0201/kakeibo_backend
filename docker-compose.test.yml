@@ -13,3 +13,4 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_HOST: ${MYSQL_HOST}
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rspec"
