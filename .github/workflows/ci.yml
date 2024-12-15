@@ -101,10 +101,10 @@ jobs:
       - name: Debug secrets
         run: |
           env
-          echo $MYSQL_USER
           rm -rf ~/.cache
-          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}"
-          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
+          echo "MYSQL_HOST=$MYSQL_HOST"
+          echo "MYSQL_USER=$MYSQL_USER"
+          echo "MYSQL_PASSWORD=$MYSQL_PASSWORD"
         
 
       - name: Run RSpec tests
