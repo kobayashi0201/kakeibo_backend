@@ -98,5 +98,14 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:schema:load
 
+      - name: Debug secrets
+        run: |
+          env
+          echo $MYSQL_USER
+          rm -rf ~/.cache
+          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}"
+          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
+        
+
       - name: Run RSpec tests
         run: bundle exec rspec
