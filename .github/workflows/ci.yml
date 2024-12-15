@@ -87,17 +87,11 @@ jobs:
 
       - name: Set MYSQL_HOST environment variable
         run: |
-          echo "MYSQL_HOST=localhost" >> $GITHUB_ENV
+          echo "MYSQL_HOST=db" >> $GITHUB_ENV
           echo "RAILS_ENV=test" >> $GITHUB_ENV
           echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> $GITHUB_ENV
           echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> $GITHUB_ENV
-
-      - name: Wait for MySQL to be ready
-        run: |
-          while ! mysqladmin ping -h"localhost" --silent; do
-            echo "Waiting for database connection..."
-            sleep 2
-          done
+          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> $GITHUB_ENV
 
       - name: Prepare database
         run: |
