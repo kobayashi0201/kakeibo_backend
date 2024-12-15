@@ -93,11 +93,6 @@ jobs:
           echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> $GITHUB_ENV
           echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> $GITHUB_ENV
 
-      - name: Prepare database
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
-
       - name: Debug secrets
         run: |
           env
@@ -105,7 +100,11 @@ jobs:
           echo "MYSQL_HOST=$MYSQL_HOST"
           echo "MYSQL_USER=$MYSQL_USER"
           echo "MYSQL_PASSWORD=$MYSQL_PASSWORD"
-        
+
+      - name: Prepare database
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
 
       - name: Run RSpec tests
         run: bundle exec rspec
