@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Transaction, type: :model do
-  let(:valid_attributes) { { amount: 1000, date: '2025-01-01', description: 'テスト', user_id: 1, category_id: 1 } }
+  let(:user) { create(:user) }
+  let(:category) { create(:category) }
+  let(:valid_attributes) { { amount: 1000, date: '2025-01-01', description: 'テスト', user_id: user.id, category_id: category.id } }
 
   shared_examples 'a transaction with missing attribute' do |attribute|
     it "is not valid without a #{attribute}" do
