@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_26_035950) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
   create_table "ai_recommendations", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "recommend", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_035950) do
 
   create_table "transactions", charset: "utf8mb3", force: :cascade do |t|
     t.decimal "amount", precision: 10, null: false
-    t.date "date", null: false
+    t.string "date", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

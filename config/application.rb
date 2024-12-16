@@ -27,6 +27,7 @@ module Kakeibo
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
+    config.eager_load_paths += %W[kakeibo/app/services]
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -38,5 +39,8 @@ module Kakeibo
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.middleware.delete ActionDispatch::Cookies
+    config.middleware.delete ActionDispatch::Session::CookieStore
   end
 end
