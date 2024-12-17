@@ -13,7 +13,7 @@ RSpec.describe 'Transactions API', type: :request do
     it 'return a 200 status code' do
       send_get_request
       expect(response).to have_http_status(:ok)
-    end 
+    end
 
     it 'return all transactions in JSON format' do
       create_list(:transaction, 10)
