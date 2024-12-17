@@ -1,6 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe 'Transactions API', type: :request do
+  describe 'GET /index' do
+    before do
+      Transaction.delete_all
+    end
+
+    def send_get_request
+      get "#{@base_url}/api/v1/transactions"
+    end
+
+    it 'return a 200 status code' do
+      send_get_request
+      expect(response).to have_http_status(:ok)
+    end 
+
+    it 'return all transactions in JSON format' do
+      create_list(:transaction, 10)
+      send_get_request
+      json = JSON.parse(response.body)
+      expect(json.size).to eq(10)
+    end
+  end
+
   describe 'POST /create' do
     let(:user) { create(:user) }
     let(:category) { create(:category) }

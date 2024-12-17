@@ -1,4 +1,9 @@
 class Api::V1::TransactionsController < ActionController::API
+  def index
+    transactions = Transaction.all
+    render json: transactions, status: :ok
+  end
+
   def create
     service = CreateTransactionService.new(transaction_params)
     result = service.create_transaction
