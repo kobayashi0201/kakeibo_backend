@@ -89,7 +89,7 @@ RSpec.describe 'Transactions API', type: :request do
     end
   end
 
-  describe 'DELETE /destroy_multiple' do 
+  describe 'DELETE /destroy_multiple' do
     let(:transactions) { create_list(:transaction, 5) }
 
     def send_delete_multiple_request(params)
@@ -107,7 +107,7 @@ RSpec.describe 'Transactions API', type: :request do
     end
 
     it 'return a 404 status code' do
-      send_delete_multiple_request(ids: [999])
+      send_delete_multiple_request(ids: [ 999 ])
       expect(response).to have_http_status(:not_found)
     end
 

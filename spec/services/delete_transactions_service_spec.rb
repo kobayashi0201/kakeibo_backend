@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DeleteTransactionsService, type: :service do
   describe 'destroy' do
-    let(:transaction) { create(:transaction) } 
+    let(:transaction) { create(:transaction) }
 
     it 'delete a transaction' do
       expect { DeleteTransactionsService.new(transaction.id).delete_transaction }.to change(Transaction, :count).by(0)

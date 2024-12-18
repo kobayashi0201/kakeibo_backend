@@ -6,20 +6,20 @@
   def delete_transaction
     transaction = Transaction.find_by(id: @transaction_ids)
     if transaction.nil?
-      return false
+      false
     else
       transaction.destroy
-      return true
+      true
     end
   end
 
   def delete_transactions
     transactions = Transaction.where(id: @transaction_ids)
     if transactions.empty?
-      return false
+      false
     else
       transactions.destroy_all
-      return true
+      true
     end
   end
-end
+ end
