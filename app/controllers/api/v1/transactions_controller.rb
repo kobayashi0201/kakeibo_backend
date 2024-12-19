@@ -15,6 +15,31 @@ class Api::V1::TransactionsController < ActionController::API
     end
   end
 
+  def destroy
+    service = DeleteTransactionsService.new(params[:id])
+    result = service.delete_transaction
+
+    if result
+      render json: { message: "Transaction deleted" }, status: :ok
+    else
+      render json: { error: "Transaction not found" }, status: :not_found
+    end
+  end
+
+  def destroy_multiple
+    if params[:ids].blank?
+      render json: { error: "No IDs provided" }, status: :unprocessable_entity
+      return
+    end
+    service = DeleteTransactionsService.new(params[:ids])
+    result = service.delete_transactions
+    if result
+      render json: { message: "Transactions deleted" }, status: :ok
+    else
+      render json: { error: "Transactions not found" }, status: :not_found
+    end
+  end
+
   private
 
   def transaction_params

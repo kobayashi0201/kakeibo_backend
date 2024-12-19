@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Transactions API', type: :request do
-  describe 'GET /index' do
-    before do
-      Transaction.delete_all
-    end
+  before do
+    Transaction.delete_all
+  end
 
+  describe 'GET /index' do
     def send_get_request
       get "#{@base_url}/api/v1/transactions"
     end
@@ -57,6 +57,63 @@ RSpec.describe 'Transactions API', type: :request do
       expect(json['amount']).to eq(1000)
       expect(json['date']).to eq('2025-01-01')
       expect(json['description']).to eq('テスト')
+    end
+
+    it 'return a 422 status code' do
+      transaction_params[:transaction][:amount] = nil
+      send_post_request(transaction_params)
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
+  describe 'DELETE /destroy' do
+    let(:id) { create(:transaction).id }
+
+    def send_delete_request(params)
+      delete "#{@base_url}/api/v1/transactions/#{params}"
+    end
+
+    it 'return a 200 status code' do
+      send_delete_request(id)
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'delete a transaction' do
+      send_delete_request(id)
+      expect(Transaction.count).to eq(0)
+    end
+
+    it 'return a 404 status code' do
+      send_delete_request(999)
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
+  describe 'DELETE /destroy_multiple' do
+    let(:transactions) { create_list(:transaction, 5) }
+
+    def send_delete_multiple_request(params)
+      delete "#{@base_url}/api/v1/transactions/destroy_multiple", params: params
+    end
+
+    it 'return a 200 status code' do
+      send_delete_multiple_request(ids: transactions[0..2].pluck(:id))
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'delete transactions' do
+      send_delete_multiple_request(ids: transactions[0..2].pluck(:id))
+      expect(Transaction.count).to eq(2)
+    end
+
+    it 'return a 404 status code' do
+      send_delete_multiple_request(ids: [ 999 ])
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it 'return a 422 status code' do
+      send_delete_multiple_request(ids: nil)
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 end
