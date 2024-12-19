@@ -9,6 +9,7 @@ RSpec.describe CreateTransactionService, type: :service do
         amount: 1000,
         date: '2025-01-01',
         description: 'テスト',
+        transaction_type: 'expense',
         user_id: user.id,
         category_id: category.id
       }
