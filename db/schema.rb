@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_19_114143) do
   create_table "ai_recommendations", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "recommend", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_145824) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "category_id", null: false
+    t.integer "transaction_type", default: 0, null: false
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["user_id"], name: "fk_rails_77364e6416"
   end

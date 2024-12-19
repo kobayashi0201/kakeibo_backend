@@ -32,6 +32,7 @@ RSpec.describe 'Transactions API', type: :request do
           amount: 1000,
           date: '2025-01-01',
           description: 'テスト',
+          transaction_type: 'expense',
           user_id: user.id,
           category_id: category.id
         }
@@ -57,6 +58,7 @@ RSpec.describe 'Transactions API', type: :request do
       expect(json['amount']).to eq(1000)
       expect(json['date']).to eq('2025-01-01')
       expect(json['description']).to eq('テスト')
+      expect(json['transaction_type']).to eq('expense')
     end
 
     it 'return a 422 status code' do

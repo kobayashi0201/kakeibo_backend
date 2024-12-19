@@ -43,6 +43,6 @@ class Api::V1::TransactionsController < ActionController::API
   private
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :date, :description, :user_id, :category_id)
+    params.require(:transaction).permit(:amount, :date, :description, :user_id, :category_id, :transaction_type)
   end
 end
