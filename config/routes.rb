@@ -19,6 +19,12 @@ Rails.application.routes.draw do
           delete :destroy_multiple
         end
       end
+
+      resources :categories, only: [ :index, :create, :update, :destroy ] do
+        collection do
+          delete :destroy_multiple
+        end
+      end
     end
   end
 

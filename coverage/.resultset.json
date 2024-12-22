@@ -103,6 +103,22 @@
           null
         ]
       },
+      "/rails/app/controllers/api/v1/categories_controller.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
       "/rails/app/controllers/api/v1/transactions_controller.rb": {
         "lines": [
           1,
@@ -222,6 +238,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1734616648
+    "timestamp": 1734790486
   }
 }
