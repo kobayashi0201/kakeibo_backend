@@ -11,7 +11,7 @@ class CalculateTransactionService
     amount = @transaction_params[:amount].to_f
 
     if matched_data_by_date
-      update_existing_data(matched_data_by_date, category_id, amount)
+      update_existing_transaction(matched_data_by_date, category_id, amount)
     else
       create_new_transaction(year_month, category_id, amount)
     end
