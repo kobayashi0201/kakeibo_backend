@@ -21,7 +21,7 @@ RSpec.describe CalculateTransactionService, type: :service do
         expect { service.calculate_monthly_transations }.to change(CalculatedMonthlyTransaction, :count).by(1)
         expect(CalculatedMonthlyTransaction.last.total).to eq(1000)
         expect(CalculatedMonthlyTransaction.last.total_by_category[category.id.to_s]).to eq(1000)
-        expect(CalculatedMonthlyTransaction.last.percentage_by_category[category.id.to_s]).to eq(100) 
+        expect(CalculatedMonthlyTransaction.last.percentage_by_category[category.id.to_s]).to eq(100)
         expect(CalculatedMonthlyTransaction.last.month).to eq(Date.new(2025, 1, 1))
       end
     end

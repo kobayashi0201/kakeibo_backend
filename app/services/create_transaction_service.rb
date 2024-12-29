@@ -9,9 +9,9 @@ class CreateTransactionService
     if transaction.save
       calculate_service = CalculateTransactionService.new(@transaction_params)
       calculate_service.calculate_monthly_transations
-      return transaction
+      transaction
     else
-      return transaction.errors
+      transaction.errors
     end
   end
 end
