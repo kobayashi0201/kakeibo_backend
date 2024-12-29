@@ -19,7 +19,7 @@ class CalculateTransactionService
 
   private
 
-  def update_existing_data(matched_data_by_date, category_id, amount)
+  def update_existing_transaction(matched_data_by_date, category_id, amount)
     total = matched_data_by_date.total.to_f + amount
 
     total_by_category = matched_data_by_date.total_by_category
