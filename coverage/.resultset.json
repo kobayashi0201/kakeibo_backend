@@ -33,6 +33,61 @@
           null
         ]
       },
+      "/rails/app/services/calculate_transaction_service.rb": {
+        "lines": [
+          1,
+          1,
+          9,
+          null,
+          null,
+          1,
+          9,
+          9,
+          9,
+          9,
+          9,
+          null,
+          9,
+          2,
+          null,
+          7,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          2,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          2,
+          2,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/rails/app/services/create_transaction_service.rb": {
         "lines": [
           1,
@@ -44,6 +99,8 @@
           5,
           null,
           5,
+          4,
+          4,
           4,
           null,
           1,
@@ -110,12 +167,6 @@
           2,
           2,
           null,
-          null,
-          1,
-          null,
-          1,
-          0,
-          null,
           null
         ]
       },
@@ -171,6 +222,13 @@
           null
         ]
       },
+      "/rails/app/models/calculated_monthly_transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
       "/rails/app/controllers/application_controller.rb": {
         "lines": [
           0,
@@ -213,14 +271,6 @@
         ],
         "branches": {}
       },
-      "/rails/app/models/calculated_monthly_transaction.rb": {
-        "lines": [
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
       "/rails/app/models/calculated_weekly_transaction.rb": {
         "lines": [
           0,
@@ -238,6 +288,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1734790486
+    "timestamp": 1735463154
   }
 }
