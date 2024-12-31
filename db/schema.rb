@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_19_114143) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_31_040629) do
   create_table "ai_recommendations", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "recommend", null: false
@@ -28,7 +28,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_19_114143) do
     t.json "percentage_by_category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "month"], name: "index_calculated_monthly_transactions_on_user_id_and_month", unique: true
+    t.integer "transaction_type", default: 0, null: false
+    t.index ["user_id", "month", "transaction_type"], name: "index_calculated_monthly_transactions_on_uid_month_type", unique: true
     t.index ["user_id"], name: "index_calculated_monthly_transactions_on_user_id"
   end
 
@@ -40,7 +41,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_19_114143) do
     t.json "percentage_by_category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "week_start_date"], name: "idx_on_user_id_week_start_date_a562fa14c0", unique: true
+    t.integer "transaction_type", default: 0, null: false
+    t.index ["user_id", "week_start_date", "transaction_type"], name: "index_calculated_weekly_transactions_on_uid_week_start_date_type", unique: true
     t.index ["user_id"], name: "index_calculated_weekly_transactions_on_user_id"
   end
 
