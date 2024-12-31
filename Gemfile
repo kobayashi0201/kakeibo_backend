@@ -56,7 +56,7 @@ group :development, :test do
   gem "pry-rails"
   gem "pry-byebug"
 
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 7.1"
   gem "factory_bot_rails", "~> 6.0"
   gem "simplecov", require: false
 end
