@@ -26,7 +26,7 @@ class CalculateTransactionService
     calculate_total_by_category(category_id, amount, total_by_category)
 
     percentage_by_category = matched_data.percentage_by_category
-    calculate_percentage_by_category(total, total_by_category, percentage_by_category, )
+    calculate_percentage_by_category(total, total_by_category, percentage_by_category,)
 
     matched_data.update(
       total: total,
