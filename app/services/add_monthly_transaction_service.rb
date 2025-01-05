@@ -1,9 +1,9 @@
-class CalculateTransactionService
+class AddMonthlyTransactionService
   def initialize(transaction_params)
     @transaction_params = transaction_params
   end
 
-  def calculate_monthly_transations
+  def add_monthly_transations
     date = @transaction_params[:date].to_date
     year_month = Date.new(date.year, date.month, 1)
     matched_data = CalculatedMonthlyTransaction.where("EXTRACT(YEAR FROM month) = ? AND EXTRACT(MONTH FROM month) = ?", date.year, date.month).where(transaction_type: @transaction_params[:transaction_type]).first
@@ -56,7 +56,7 @@ class CalculateTransactionService
 
   def calculate_percentage_by_category(total, total_by_category, percentage_by_category)
     total_by_category.each do |category_id, amount|
-      percentage_by_category[category_id] = (amount / total) * 100.0
+      percentage_by_category[category_id] = ((amount / total) * 100.0).round(2)
     end
   end
 end
