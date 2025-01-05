@@ -3,13 +3,26 @@ require 'rails_helper'
 RSpec.describe 'Transactions API', type: :request do
   before do
     Transaction.delete_all
+    CalculatedMonthlyTransaction.delete_all
+  end
+
+  def send_get_request
+    get "#{@base_url}/api/v1/transactions"
+  end
+
+  def send_post_request(params)
+    post "#{@base_url}/api/v1/transactions", params: params
+  end
+
+  def send_delete_request(params)
+    delete "#{@base_url}/api/v1/transactions/#{params}"
+  end
+
+  def send_delete_multiple_request(params)
+    delete "#{@base_url}/api/v1/transactions/destroy_multiple", params: params
   end
 
   describe 'GET /index' do
-    def send_get_request
-      get "#{@base_url}/api/v1/transactions"
-    end
-
     it 'return a 200 status code' do
       send_get_request
       expect(response).to have_http_status(:ok)
@@ -37,19 +50,17 @@ RSpec.describe 'Transactions API', type: :request do
           category_id: category.id
         }
       }
-    end
-
-    def send_post_request(params)
-      post "#{@base_url}/api/v1/transactions", params: params
-    end
+    end 
 
     it 'return a 201 status code' do
       send_post_request(transaction_params)
       expect(response).to have_http_status(:created)
     end
 
-    it 'create a new transaction' do
+    it 'create a new transaction and update CalculatedMonthlyTransaction' do
       expect { send_post_request(transaction_params) }.to change(Transaction, :count).by(1)
+      expect(CalculatedMonthlyTransaction.last.total).to eq(1000)
+      expect(CalculatedMonthlyTransaction.last.total_by_category[category.id.to_s]).to eq(1000)
     end
 
     it 'created transaction in JSON format' do
@@ -69,20 +80,36 @@ RSpec.describe 'Transactions API', type: :request do
   end
 
   describe 'DELETE /destroy' do
-    let(:id) { create(:transaction).id }
-
-    def send_delete_request(params)
-      delete "#{@base_url}/api/v1/transactions/#{params}"
+    before do
+      @user = create(:user)
+      @category = create(:category)
+      @transaction = Transaction.create!(
+        amount: 1000,
+        date: '2025-01-01',
+        description: 'delete test',
+        transaction_type: 'expense',
+        user_id: @user.id,
+        category_id: @category.id
+      )
+      @calculated_monthly_transaction = CalculatedMonthlyTransaction.create!(
+        month: '2025-01-01',
+        total: 1000,
+        total_by_category: { @category.id.to_s => 1000 },
+        percentage_by_category: { @category.id.to_s => 100.0 },
+        transaction_type: 'expense',
+        user_id: @user.id
+      )
     end
 
     it 'return a 200 status code' do
-      send_delete_request(id)
+      send_delete_request(@transaction['id'])
       expect(response).to have_http_status(:ok)
     end
 
     it 'delete a transaction' do
-      send_delete_request(id)
+      send_delete_request(@transaction['id'])
       expect(Transaction.count).to eq(0)
+      expect(CalculatedMonthlyTransaction.count).to eq(0)
     end
 
     it 'return a 404 status code' do
@@ -92,24 +119,32 @@ RSpec.describe 'Transactions API', type: :request do
   end
 
   describe 'DELETE /destroy_multiple' do
-    let(:transactions) { create_list(:transaction, 5) }
-
-    def send_delete_multiple_request(params)
-      delete "#{@base_url}/api/v1/transactions/destroy_multiple", params: params
+    before do
+      @transactions = create_list(:transaction, 5, category_id: create(:category).id, user_id: create(:user).id)
+      @calculated_monthly_transactions = CalculatedMonthlyTransaction.create!(
+        month: '2025-01-01',
+        total: 5000,
+        total_by_category: { @transactions[0].category_id.to_s => 5000 },
+        percentage_by_category: { @transactions[0].category_id.to_s => 100.0 },
+        transaction_type: 'expense',
+        user_id: @transactions[0].user_id
+      )
     end
 
     it 'return a 200 status code' do
-      send_delete_multiple_request(ids: transactions[0..2].pluck(:id))
+      send_delete_multiple_request(ids: @transactions[0..2].pluck(:id))
       expect(response).to have_http_status(:ok)
     end
 
     it 'delete transactions' do
-      send_delete_multiple_request(ids: transactions[0..2].pluck(:id))
+      send_delete_multiple_request(ids: @transactions[0..2].pluck(:id))
       expect(Transaction.count).to eq(2)
+      expect(CalculatedMonthlyTransaction.count).to eq(1)
+      expect(CalculatedMonthlyTransaction.first.total).to eq(2000)
     end
 
     it 'return a 404 status code' do
-      send_delete_multiple_request(ids: [ 999 ])
+      send_delete_multiple_request(ids: [ 998, 999 ])
       expect(response).to have_http_status(:not_found)
     end
 

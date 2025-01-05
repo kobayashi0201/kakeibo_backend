@@ -1,24 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe CalculateTransactionService, type: :service do
-  describe 'calculate' do
-    let(:user) { create(:user) }
-    let(:category) { create(:category) }
-    let(:transaction_params) do
-      {
-        amount: 1000,
-        date: '2025-01-05',
-        description: 'テスト',
-        transaction_type: 'expense',
-        user_id: user.id,
-        category_id: category.id
-      }
+RSpec.describe AddMonthlyTransactionService, type: :service do
+  describe 'add monthly transaction' do
+    before do
+      Transaction.destroy_all
+      CalculatedMonthlyTransaction.destroy_all
     end
+    
+    let(:user) { create(:user) }
+      let(:category) { create(:category) }
+      let(:transaction_params) do
+        {
+          amount: 1000,
+          date: '2025-01-05',
+          description: 'テスト',
+          transaction_type: 'expense',
+          user_id: user.id,
+          category_id: category.id
+        }
+      end
 
     context 'when a same month data does not exists' do
       it 'creates a new calculated monthly transaction' do
-        service = CalculateTransactionService.new(transaction_params)
-        expect { service.calculate_monthly_transations }.to change(CalculatedMonthlyTransaction, :count).by(1)
+        service = AddMonthlyTransactionService.new(transaction_params)
+        expect { service.add_monthly_transations }.to change(CalculatedMonthlyTransaction, :count).by(1)
         expect(CalculatedMonthlyTransaction.last.total).to eq(1000)
         expect(CalculatedMonthlyTransaction.last.total_by_category[category.id.to_s]).to eq(1000)
         expect(CalculatedMonthlyTransaction.last.percentage_by_category[category.id.to_s]).to eq(100)
@@ -50,8 +55,8 @@ RSpec.describe CalculateTransactionService, type: :service do
       end
 
       it 'calculate transaction without same category' do
-        CalculateTransactionService.new(transaction_params).calculate_monthly_transations
-        CalculateTransactionService.new(other_category_transaction_params).calculate_monthly_transations
+        AddMonthlyTransactionService.new(transaction_params).add_monthly_transations
+        AddMonthlyTransactionService.new(other_category_transaction_params).add_monthly_transations
         expect(CalculatedMonthlyTransaction.last.total).to eq(4000)
         expect(CalculatedMonthlyTransaction.last.total_by_category[other_category.id.to_s]).to eq(3000)
         expect(CalculatedMonthlyTransaction.last.percentage_by_category[other_category.id.to_s]).to eq(75)
@@ -59,8 +64,8 @@ RSpec.describe CalculateTransactionService, type: :service do
       end
 
       it 'calculate transaction with same category' do
-        CalculateTransactionService.new(transaction_params).calculate_monthly_transations
-        CalculateTransactionService.new(other_transaction_params).calculate_monthly_transations
+        AddMonthlyTransactionService.new(transaction_params).add_monthly_transations
+        AddMonthlyTransactionService.new(other_transaction_params).add_monthly_transations
         expect(CalculatedMonthlyTransaction.last.total).to eq(4000)
         expect(CalculatedMonthlyTransaction.last.total_by_category[category.id.to_s]).to eq(4000)
         expect(CalculatedMonthlyTransaction.last.percentage_by_category[category.id.to_s]).to eq(100)
@@ -81,8 +86,8 @@ RSpec.describe CalculateTransactionService, type: :service do
       end
 
       it 'creates a new calculated monthly transaction' do
-        service = CalculateTransactionService.new(transaction_params).calculate_monthly_transations
-        service = CalculateTransactionService.new(income_transaction_params).calculate_monthly_transations
+        service = AddMonthlyTransactionService.new(transaction_params).add_monthly_transations
+        service = AddMonthlyTransactionService.new(income_transaction_params).add_monthly_transations
         expect(CalculatedMonthlyTransaction.last.total).to eq(10000)
         expect(CalculatedMonthlyTransaction.last.total_by_category[category.id.to_s]).to eq(10000)
         expect(CalculatedMonthlyTransaction.last.percentage_by_category[category.id.to_s]).to eq(100)

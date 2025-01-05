@@ -7,8 +7,8 @@ class CreateTransactionService
     transaction = Transaction.new(@transaction_params)
 
     if transaction.save
-      calculate_service = CalculateTransactionService.new(@transaction_params)
-      calculate_service.calculate_monthly_transations
+      calculate_service = AddMonthlyTransactionService.new(@transaction_params)
+      calculate_service.add_monthly_transations
       transaction
     else
       transaction.errors
