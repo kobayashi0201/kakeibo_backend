@@ -1,4 +1,4 @@
-require 'pry'
+require "pry"
 class DeleteTransactionsService
   def initialize(transaction_ids)
     @transaction_ids = transaction_ids

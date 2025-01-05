@@ -28,7 +28,7 @@ RSpec.describe ExceptMonthlyTransactionService, type: :service do
       }
     end
 
-    context 'delete a transaction' do      
+    context 'delete a transaction' do
       it 'calculation result is not 0' do
         ExceptMonthlyTransactionService.new(@transaction2['id']).except_monthly_transations
         expect(CalculatedMonthlyTransaction.first.total).to eq(3000)
@@ -45,7 +45,7 @@ RSpec.describe ExceptMonthlyTransactionService, type: :service do
     end
 
     it 'delete multiple transactions' do
-      ExceptMonthlyTransactionService.new([@transaction2['id'], @transaction3['id']]).except_monthly_transations
+      ExceptMonthlyTransactionService.new([ @transaction2['id'], @transaction3['id'] ]).except_monthly_transations
       expect(CalculatedMonthlyTransaction.first.total).to eq(2000)
       expect(CalculatedMonthlyTransaction.first.total_by_category[@transaction2['category_id'].to_s]).to eq(1000)
       expect(CalculatedMonthlyTransaction.first.total_by_category[@transaction3['category_id'].to_s]).to be_nil

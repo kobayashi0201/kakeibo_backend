@@ -50,7 +50,7 @@ RSpec.describe 'Transactions API', type: :request do
           category_id: category.id
         }
       }
-    end 
+    end
 
     it 'return a 201 status code' do
       send_post_request(transaction_params)

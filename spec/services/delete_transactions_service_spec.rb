@@ -47,7 +47,7 @@ RSpec.describe DeleteTransactionsService, type: :service do
 
   describe 'destroy_multiple' do
     it 'delete a transaction' do
-      expect { DeleteTransactionsService.new([@transaction1.id, @transaction2.id]).delete_transactions }.to change(Transaction, :count).by(-2)
+      expect { DeleteTransactionsService.new([ @transaction1.id, @transaction2.id ]).delete_transactions }.to change(Transaction, :count).by(-2)
     end
 
     it 'calls ExceptTransactionService to update CalculatedMonthlyTransactions for multiple transactions' do
@@ -55,9 +55,9 @@ RSpec.describe DeleteTransactionsService, type: :service do
       allow(ExceptMonthlyTransactionService).to receive(:new).and_return(except_service)
       allow(except_service).to receive(:except_monthly_transations)
 
-      DeleteTransactionsService.new([@transaction1.id, @transaction2.id]).delete_transactions
+      DeleteTransactionsService.new([ @transaction1.id, @transaction2.id ]).delete_transactions
 
-      expect(ExceptMonthlyTransactionService).to have_received(:new).with([@transaction1.id, @transaction2.id])
+      expect(ExceptMonthlyTransactionService).to have_received(:new).with([ @transaction1.id, @transaction2.id ])
       expect(except_service).to have_received(:except_monthly_transations)
     end
   end

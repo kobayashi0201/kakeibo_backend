@@ -6,7 +6,7 @@ RSpec.describe AddMonthlyTransactionService, type: :service do
       Transaction.destroy_all
       CalculatedMonthlyTransaction.destroy_all
     end
-    
+
     let(:user) { create(:user) }
       let(:category) { create(:category) }
       let(:transaction_params) do
