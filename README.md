@@ -1,24 +1,31 @@
 # README
+## プロジェクト名
+家計簿アプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 要件定義書
+https://docs.google.com/spreadsheets/d/1rlNiBS8v7k8ah4fHNj1zGBNZ_PMaRFpsryAfmxVuA7w/edit?gid=1715608027#gid=1715608027
 
-Things you may want to cover:
+## 概要
+一般家庭で利用するような収支を記録し、分析する家計簿アプリを作成する。
 
-* Ruby version
+## 技術スタック
+言語：フロントエンドTypeScript、バックエンドRuby
+フレームワーク：フロントエンドNext.js、バックエンド
+Ruby on Rails
+DB：MySQL
+クラウド：AWS（S3）
+コンテナ：Docker
+CI/CD：Github Actions
+開発環境：Mac、VSCode
+その他：Github Copilot
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 機能
+- 収支の金額、日付、カテゴリ、内容を登録する
+- 登録した収支のデータを削除する。
+- 登録した収支のデータを一覧で表示する。
+- 登録した収支のデータをグラフで表示する。
+（実装予定）
+- 収支ごとに画像を登録する。
+- 目標貯蓄額を登録する。
+- AIから目標貯蓄額の達成のためのレコメンドをもら
+う。
