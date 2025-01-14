@@ -24,6 +24,10 @@ https://docs.google.com/spreadsheets/d/1rlNiBS8v7k8ah4fHNj1zGBNZ_PMaRFpsryAfmxVu
 - 登録した収支のデータを一覧で表示する。
 - 登録した収支のデータをグラフで表示する。
 
+https://github.com/user-attachments/assets/1dc87558-54e8-411d-a789-87044f7a8d3b
+
+
+
 （実装予定）
 - 収支ごとに画像を登録する。
 - 目標貯蓄額を登録する。
