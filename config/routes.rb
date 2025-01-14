@@ -25,6 +25,8 @@ Rails.application.routes.draw do
           delete :destroy_multiple
         end
       end
+
+      resources :calculated_monthly_transactions, only: [ :index ]
     end
   end
 
