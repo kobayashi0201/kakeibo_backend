@@ -1,5 +1,4 @@
 require 'rails_helper'
-# require_relative '../../app/services/except_monthly_transaction_service'
 
 RSpec.describe DeleteTransactionsService, type: :service do
   before do
